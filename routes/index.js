@@ -23,7 +23,7 @@ router.post('/', function(req, res) {
   form.keepExtensions = true;	 //保留后缀
   console.log("22228888");
   form.maxFieldsSize = 10 * 1024 * 1024;   //文件大小
-
+  console.log("22229999");
   form.parse(req, function(err, fields, files) {
     console.log("444");
     if (err) {
@@ -71,6 +71,7 @@ router.post('/', function(req, res) {
 
   });
 
+  console.log("2222898989");
   res.locals.success = '上传成功';
   res.render('index', { title: TITLE });
 });
