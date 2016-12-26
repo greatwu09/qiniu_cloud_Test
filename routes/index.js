@@ -10,11 +10,12 @@ var uploadqiniu  = require('../upload');
 
 /* GET home page. */
 router.get('/', function(req, res) {
+  console.log("1111");
   res.render('index', { title: TITLE });
 });
 
 router.post('/', function(req, res) {
-
+  console.log("2222");
   var form = new formidable.IncomingForm();   //创建上传表单
   form.encoding = 'utf-8';		//设置编辑
   form.uploadDir = 'public' + AVATAR_UPLOAD_FOLDER;	 //设置上传目录
