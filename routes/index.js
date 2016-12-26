@@ -23,7 +23,7 @@ router.post('/', function(req, res) {
   form.maxFieldsSize = 10 * 1024 * 1024;   //文件大小
 
   form.parse(req, function(err, fields, files) {
-
+    console.log("444");
     if (err) {
       res.locals.error = err;
       res.render('index', { title: TITLE });
@@ -55,6 +55,7 @@ router.post('/', function(req, res) {
     var avatarName = Math.random() + '.' + extName;
     var newPath = form.uploadDir + avatarName;
 
+    console.log("555");
     console.log(newPath);
     fs.renameSync(files.fulAvatar.path, newPath);  //重命名
 
