@@ -5,25 +5,32 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-
+var routes = require('./routes/route');
+var api = require('./routes/api');
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+//app.set('view engine', 'ejs');
+// ����ģ���ļ�����չ��Ϊhtml
+app.engine('html', require('ejs').renderFile); // ��ejsģ������������'.html'��׺���ļ�
+app.set('view engine', 'html');
+
+// ����public�ļ�Ŀ¼�ʾ�̬Ŀ¼
+app.use(express.static(path.join(__dirname, 'public'),{index:false}));
+app.use(express.static(path.join(__dirname, 'common'),{index:false}));
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/', routes);
+app.use('/api', api);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -32,15 +39,28 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// error handlers
 
-  // render the error page
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 var serverPort = process.env.PORT || 5000;
