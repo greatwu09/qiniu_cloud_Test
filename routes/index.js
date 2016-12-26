@@ -17,9 +17,11 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
   console.log("2222");
   var form = new formidable.IncomingForm();   //创建上传表单
+  console.log("2222777");
   form.encoding = 'utf-8';		//设置编辑
   form.uploadDir = 'public' + AVATAR_UPLOAD_FOLDER;	 //设置上传目录
   form.keepExtensions = true;	 //保留后缀
+  console.log("22228888");
   form.maxFieldsSize = 10 * 1024 * 1024;   //文件大小
 
   form.parse(req, function(err, fields, files) {
