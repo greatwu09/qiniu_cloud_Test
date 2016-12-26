@@ -43,7 +43,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(8000);
+var serverPort = process.env.PORT || 5000;
+app.listen(serverPort);
 
 
 module.exports = app;
