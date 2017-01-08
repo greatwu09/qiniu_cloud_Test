@@ -4,5 +4,6 @@ module.exports = {
     'Bucket_Name': 'myplan',                             // 七牛-个人空间名
     'Port': 19111,
     'Uptoken_Url': '/api/fileupload/uptoken',               // 获取token路径
-    'Domain': '7xqqm5.com1.z0.glb.clouddn.com'    // 七牛子域名，自定义域名。
+    //'Domain': '7xqqm5.com1.z0.glb.clouddn.com'    // 七牛子域名，自定义域名。
+    'Domain': 'oin5dqv2h.bkt.clouddn.com'
 };
