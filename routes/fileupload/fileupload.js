@@ -18,6 +18,7 @@ router.
     get('/uptoken', function(req, res, next) {
         console.log("1111");
         var token = uptoken.token();
+        res.header("Access-Control-Allow-Origin", "*");
         res.header("Cache-Control", "max-age=0, private, must-revalidate");
         res.header("Pragma", "no-cache");
         res.header("Expires", 0);
