@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/route');
 var api = require('./routes/api');
 var app = express();
+//20170118
+var mysql = require('mysql');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -62,6 +64,58 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+//20170118
+var db_config = {
+  host: 'us-cdbr-iron-east-04.cleardb.net',
+  user: 'bcaf52a66bd308',
+  password: '106519b9',
+  database: 'heroku_0a38ee070c97de9'
+};
+
+
+var connection;
+var dataRows;
+
+function handleDisconnect() {
+  console.log('1. connecting to db:');
+  connection = mysql.createConnection(db_config); // Recreate the connection, since
+                                                  // the old one cannot be reused.
+
+  connection.connect(function(err) {              	// The server is either down
+    if (err) {                                     // or restarting (takes a while sometimes).
+      console.log('2. error when connecting to db:', err);
+      setTimeout(handleDisconnect, 1000); // We introduce a delay before attempting to reconnect,
+    }                                     	// to avoid a hot loop, and to allow our node script to
+  });                                     	// process asynchronous requests in the meantime.
+  // If you're also serving http, display a 503 error.
+  connection.on('error', function(err) {
+    console.log('3. db error', err);
+    if (err.code === 'PROTOCOL_CONNECTION_LOST') { 	// Connection to the MySQL server is usually
+      handleDisconnect();                      	// lost due to either server restart, or a
+    } else {                                      	// connnection idle timeout (the wait_timeout
+      throw err;                                  // server variable configures this)
+    }
+  });
+}
+
+function getDataFromDB(){
+  connection.query('SELECT * from employees', function(err, rows, fields) {
+    if (err) {
+      console.log('error: ', err);
+      throw err;
+    }
+
+    return rows;
+  });
+}
+
+handleDisconnect();
+dataRows = getDataFromDB();
+
+
+exports.dataRows = dataRows;
+
 
 var serverPort = process.env.PORT || 5000;
 app.listen(serverPort);
