@@ -1,0 +1,29 @@
+.btn-space {
+    margin-right: 5px;
+}
+
+th {
+    background-color: steelblue;
+    color: white;
+}
+
+.table-nonfluid {
+    width: auto !important;
+}
+
+/*
+.table td, .table th {
+    min-width: 100px;
+}
+*/
+
+.operateColumn {
+    min-width: 250px;
+}
+
+/*
+.home img{
+    width:100px;
+    height: 100px;
+}
+*/
