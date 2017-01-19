@@ -2,10 +2,9 @@ var express = require("express");
 var mysql = require('mysql');
 var app = express();
 
-var logger = require('morgan');
-app.use(express.logger());
+//var logger = require('morgan');
 //app.use(logger); //replaces your app.use(express.logger());
-
+app.use(express.logger());
 
 /*
 var db_config = {
