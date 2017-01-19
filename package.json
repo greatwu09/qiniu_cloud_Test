@@ -12,8 +12,15 @@
   "author": "xxxtest",
   "license": "MIT",
   "dependencies": {
-    "express": "3.1.x"
-  , "mysql": ""
+    "express": "3.1.x",
+    "mysql": "",
+    "body-parser": "^1.14.1",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "ejs": "~2.3.1",
+    "morgan": "~1.5.3",
+    "serve-favicon": "~2.2.1",
+    "qiniu": "^6.1.13"
   },
   "engines": {
     "node": "0.10.x",
