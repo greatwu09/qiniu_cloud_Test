@@ -3,7 +3,8 @@ var mysql = require('mysql');
 var app = express();
 
 var logger = require('morgan');
-app.use(logger); //replaces your app.use(express.logger());
+app.use(express.logger());
+//app.use(logger); //replaces your app.use(express.logger());
 
 
 /*
