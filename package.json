@@ -1,9 +1,9 @@
 {
-  "name": "qiniu-file-up",
-  "version": "0.0.0",
+  "name": "qiniu-file-up-new",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node web.js"
   },
   "repository": {
     "type": "git",
@@ -12,12 +12,8 @@
   "author": "xxxtest",
   "license": "MIT",
   "dependencies": {
-    "express": "~4.12.4",
+    "express": "3.1.x",
     "mysql": ""
-  },
-  "devDependencies": {
-    "jquery": "^2.2.0",
-    "respond": "^0.9.0"
   },
   "engines": {
     "node": "0.10.x",
